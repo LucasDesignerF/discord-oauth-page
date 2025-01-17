@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro Concluído</title>
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Animate.css para animações -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- CSS Personalizado -->
+    <style>
+        /* Cores do Discord */
+        :root {
+            --discord-blurple: #5865F2;
+            --discord-green: #57F287;
+            --discord-red: #ED4245;
+            --discord-white: #FFFFFF;
+            --discord-black: #23272A;
+            --discord-gray: #2C2F33;
+        }
+
+        /* Aplicando a fonte Poppins */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--discord-black);
+            color: var(--discord-white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: var(--discord-gray);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            color: var(--discord-green);
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700; /* Peso mais grosso para o título */
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-weight: 400; /* Peso normal para o texto */
+        }
+
+        .btn-discord {
+            background-color: var(--discord-blurple);
+            color: var(--discord-white);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600; /* Peso semi-negrito para o botão */
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-discord:hover {
+            background-color: #4752C4;
+        }
+
+        .footer {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: var(--discord-white);
+        }
+
+        .footer a {
+            color: var(--discord-blurple);
+            text-decoration: none;
+            font-weight: 600; /* Peso semi-negrito para links */
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animações personalizadas */
+        .animate-pop {
+            animation: pop 0.5s ease;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0.9); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container animate__animated animate__fadeInUp">
+        <h1 class="animate__animated animate__bounceIn">Registro Concluído!</h1>
+        <p class="animate__animated animate__fadeIn">
+            Seu registro foi realizado com sucesso. Você pode fechar esta página e voltar ao Discord.
+        </p>
+        <button class="btn btn-discord animate__animated animate__pulse animate__infinite" onclick="redirectToDiscord()">
+            <i class="fab fa-discord"></i> Voltar ao Discord
+        </button>
+        <div class="footer animate__animated animate__fadeIn">
+            <p>Problemas? <a href="#">Contate-nos</a></p>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS e dependências -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <!-- GSAP para animações avançadas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <!-- Script personalizado -->
+    <script>
+        // Função para redirecionar ao Discord
+        function redirectToDiscord() {
+            window.location.href = "https://discord.com";
+        }
+
+        // Animação GSAP ao carregar a página
+        gsap.from(".container", {
+            duration: 1,
+            y: -50,
+            opacity: 0,
+            ease: "power2.out",
+        });
+
+        // Animação de pop no botão
+        const button = document.querySelector(".btn-discord");
+        button.addEventListener("mouseover", () => {
+            gsap.to(button, {
+                duration: 0.3,
+                scale: 1.1,
+                ease: "power2.out",
+            });
+        });
+        button.addEventListener("mouseout", () => {
+            gsap.to(button, {
+                duration: 0.3,
+                scale: 1,
+                ease: "power2.out",
+            });
+        });
+    </script>
+</body>
+</html>
